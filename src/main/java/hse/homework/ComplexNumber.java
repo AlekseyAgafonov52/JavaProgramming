@@ -3,7 +3,7 @@ package hse.homework;
 import java.util.Objects;
 
 public class ComplexNumber {
-    private double real, image;
+    private final double real, image;
 
     public ComplexNumber() {
         this(0, 0);
@@ -27,7 +27,7 @@ public class ComplexNumber {
     }
 
     public ComplexNumber multiplication(ComplexNumber num) {
-        return new ComplexNumber(this.real*num.real - this.image*num.image, this.real*num.image + this.image*num.real);
+        return new ComplexNumber(this.real * num.real - this.image * num.image, this.real * num.image + this.image * num.real);
     }
 
     public void printCNum() {
