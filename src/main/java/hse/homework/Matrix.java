@@ -1,8 +1,11 @@
 package hse.homework;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 class Matrix {
-    private int rows, columns;
-    private ComplexNumber[][] matrix;
+    private final int rows, columns;
+    private final ComplexNumber[][] matrix;
 
     public Matrix() {
         this(0, 0);
@@ -17,8 +20,7 @@ class Matrix {
     public void setValue(int row, int column, ComplexNumber value) {
         if (row >= 0 && row < rows && column >= 0 && column < columns) {
             matrix[row][column] = value;
-        }
-        else {
+        } else {
             System.out.println("Invalid");
         }
     }
@@ -26,8 +28,7 @@ class Matrix {
     public ComplexNumber getValue(int row, int column) {
         if (row >= 0 && row < rows && column >= 0 && column < columns) {
             return matrix[row][column];
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -46,8 +47,7 @@ class Matrix {
         if (this.rows != matrix.rows || this.columns != matrix.columns) {
             System.out.println("Invalid");
             return null;
-        }
-        else{
+        } else {
             Matrix resultMatrix = new Matrix(this.rows, this.columns);
             for (int i = 0; i < matrix.rows; i++) {
                 for (int j = 0; j < matrix.columns; j++) {
@@ -59,12 +59,11 @@ class Matrix {
         }
     }
 
-    public Matrix diff(Matrix matrix) {
+    public Matrix subtract(Matrix matrix) {
         if (this.rows != matrix.rows || this.columns != matrix.columns) {
             System.out.println("Invalid");
             return null;
-        }
-        else{
+        } else {
             Matrix resultMatrix = new Matrix(this.rows, this.columns);
             for (int i = 0; i < matrix.rows; i++) {
                 for (int j = 0; j < matrix.columns; j++) {
@@ -80,8 +79,7 @@ class Matrix {
         if (this.columns != matrix.rows) {
             System.out.println("Invalid");
             return null;
-        }
-        else {
+        } else {
             Matrix resMatrix = new Matrix(this.rows, this.columns);
             for (int i = 0; i < this.rows; i++) {
                 for (int j = 0; j < matrix.columns; j++) {
@@ -104,5 +102,20 @@ class Matrix {
             }
         }
         return matrix;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Matrix matrix1 = (Matrix) o;
+        return rows == matrix1.rows && columns == matrix1.columns && Arrays.deepEquals(matrix, matrix1.matrix);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(rows, columns);
+        result = 31 * result + Arrays.deepHashCode(matrix);
+        return result;
     }
 }
