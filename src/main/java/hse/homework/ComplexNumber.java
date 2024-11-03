@@ -3,6 +3,7 @@ package hse.homework;
 import java.util.Objects;
 
 public class ComplexNumber {
+
     private final double real, image;
 
     public ComplexNumber() {
