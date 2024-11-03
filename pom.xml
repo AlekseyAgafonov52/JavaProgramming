@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>HW_1_HSE</module>
+        <module>HW_2_HSE</module>
     </modules>
 
     <properties>
