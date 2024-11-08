@@ -15,18 +15,20 @@ public class TestsHW3 {
     }
 
     @Test
-    void getDateBirthTest1(){
+    void getAgeTest1(){
         LocalDate dateBirth = LocalDate.of(2005, 4, 15);
+        LocalDate currentDate = LocalDate.parse("2024-11-09");
         String expected = "19 лет";
-        String actual = getDateBirth(dateBirth);
+        String actual = getAge(dateBirth, currentDate);
         Assertions.assertEquals(actual, expected);
     }
 
     @Test
-    void getDateBirthTest2(){
+    void getAgeTest2(){
         LocalDate dateBirth = LocalDate.of(2005, 12, 15);
+        LocalDate currentDate = LocalDate.parse("2024-11-09");
         String expected = "18 лет";
-        String actual = getDateBirth(dateBirth);
+        String actual = getAge(dateBirth, currentDate);
         Assertions.assertEquals(actual, expected);
     }
 

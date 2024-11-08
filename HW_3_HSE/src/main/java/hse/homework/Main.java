@@ -42,8 +42,8 @@ public class Main {
         }
     }
 
-    public static String getDateBirth(LocalDate birthDate) {
-        Period yearsOld = Period.between(birthDate, LocalDate.now());
+    public static String getAge(LocalDate birthDate, LocalDate currentDate) {
+        Period yearsOld = Period.between(birthDate, currentDate);
         int yearsOldInt = yearsOld.getYears();
         if (yearsOldInt < 0) {
             System.out.println("Вы ввели невозможное значение");
@@ -67,6 +67,6 @@ public class Main {
         LocalDate dateBirth = inputDateBirth();
         System.out.println("ФИО с инициалами: " + getInitials(name));
         System.out.println("Пол: " + getGender(name));
-        System.out.println("Возраст: " + getDateBirth(dateBirth));
+        System.out.println("Возраст: " + getAge(dateBirth, LocalDate.now()));
     }
 }
