@@ -51,7 +51,7 @@ public class Main {
         }
         String yearsOldStr = String.valueOf(yearsOldInt);
         int indLastChar = yearsOldStr.length()-1;
-        if (yearsOldStr.charAt(indLastChar) == '1' || (yearsOldStr.charAt(indLastChar) == '1' && yearsOldStr.charAt(indLastChar-1) % 2 == 0)) {
+        if (yearsOldStr.charAt(indLastChar) == '1') {
             return yearsOldStr + " год";
         }
         else if (yearsOldStr.charAt(indLastChar) == '2' || yearsOldStr.charAt(indLastChar) == '3' || yearsOldStr.charAt(indLastChar) == '4') {
