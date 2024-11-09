@@ -46,8 +46,8 @@ public class Main {
         Period yearsOld = Period.between(birthDate, currentDate);
         int yearsOldInt = yearsOld.getYears();
         if (yearsOldInt < 0) {
-            System.out.println("Вы ввели невозможное значение");
-            System.exit(1);
+            System.out.println("Вы ввели невозможное значение\nПожалуйста, введите правильную дату рождения в следующий раз");
+            return "";
         }
         String yearsOldStr = String.valueOf(yearsOldInt);
         int indLastChar = yearsOldStr.length()-1;
