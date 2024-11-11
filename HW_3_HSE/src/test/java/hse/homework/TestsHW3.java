@@ -10,9 +10,16 @@ import static hse.homework.Main.*;
 
 public class TestsHW3 {
     @Test
-    void printGenderTest(){
-        char expected = 'Ж';
-        char actual = getGender("Иванова Мария Ивановна");
+    void printGenderTest1(){
+        String expected = "Ж";
+        String actual = getGender("Иванова Мария Ивановна");
+        Assertions.assertEquals(actual, expected);
+    }
+
+    @Test
+    void printGenderTest2(){
+        String expected = "не определён";
+        String actual = getGender("");
         Assertions.assertEquals(actual, expected);
     }
 
@@ -38,7 +45,7 @@ public class TestsHW3 {
     void getAgeTest3() {
         Optional<LocalDate> birthDate = Optional.empty();
         LocalDate currentDate = LocalDate.parse("2024-11-09");
-        String expected = "Не определён";
+        String expected = "не определён";
         String actual = getAge(birthDate, currentDate);
         Assertions.assertEquals(actual, expected);
     }
@@ -60,9 +67,17 @@ public class TestsHW3 {
     }
 
     @Test
-    void getInitialsTest(){
+    void getInitialsTest1(){
         String name = "Агафонов Алексей Львович";
         String expected = "Агафонов А. Л.";
+        String actual = getInitials(name);
+        Assertions.assertEquals(actual, expected);
+    }
+
+    @Test
+    void getInitialsTest2(){
+        String name = "";
+        String expected = "";
         String actual = getInitials(name);
         Assertions.assertEquals(actual, expected);
     }

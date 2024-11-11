@@ -37,25 +37,34 @@ public class Main {
     }
 
     public static String getInitials(String str) {
-        String[] strArr = str.split(" ");
-        StringBuilder result = new StringBuilder(strArr[0] + " ");
-        for (int i = 1; i < strArr.length; i++) {
-            result.append(strArr[i].substring(0, 1).toUpperCase()).append(". ");
+        try {
+            String[] strArr = str.split(" ");
+            StringBuilder result = new StringBuilder(strArr[0] + " ");
+            for (int i = 1; i < strArr.length; i++) {
+                result.append(strArr[i].substring(0, 1).toUpperCase()).append(". ");
+            }
+            return result.toString().trim();
+        } catch (Exception e) {
+            return "";
         }
-        return result.toString().trim();
     }
 
-    public static char getGender(String name) {
-        if (name.trim().charAt(name.trim().length()-1) == 'а') {
-            return 'Ж';
+    public static String getGender(String name) {
+        try {
+            if (name.trim().charAt(name.trim().length()-1) == 'а') {
+                return "Ж";
+            }
+            else {
+                return "М";
+            }
         }
-        else {
-            return 'М';
+        catch (Exception e) {
+            return "не определён";
         }
     }
 
     public static String getAge(Optional<LocalDate> birthDate, LocalDate currentDate) {
-        String undefinedAge = "Не определён";
+        String undefinedAge = "не определён";
         if (!birthDate.isPresent()) {
             return undefinedAge;
         }
