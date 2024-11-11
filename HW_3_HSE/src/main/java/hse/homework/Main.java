@@ -1,6 +1,8 @@
 package hse.homework;
 
 import java.time.Period;
+import java.time.format.DateTimeParseException;
+import java.util.Optional;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,12 +17,22 @@ public class Main {
         return name;
     }
 
-    public static LocalDate inputDateBirth() {
+    public static Optional<LocalDate> inputBirthDate() {
         System.out.println("Введите вашу дату рождения, как дд.мм.гггг");
         try (Scanner scanner = new Scanner(System.in)) {
             String dateString = scanner.next();
+            return parseBirthDate(dateString);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    public static Optional<LocalDate> parseBirthDate(String birthDate) {
+        try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            return LocalDate.parse(dateString, formatter);
+            return Optional.of(LocalDate.parse(birthDate, formatter));
+        } catch (DateTimeParseException dtpe) {
+            return Optional.empty();
         }
     }
 
@@ -42,12 +54,15 @@ public class Main {
         }
     }
 
-    public static String getAge(LocalDate birthDate, LocalDate currentDate) {
-        Period yearsOld = Period.between(birthDate, currentDate);
+    public static String getAge(Optional<LocalDate> birthDate, LocalDate currentDate) {
+        String undefinedAge = "Не определён";
+        if (!birthDate.isPresent()) {
+            return undefinedAge;
+        }
+        Period yearsOld = Period.between(birthDate.get(), currentDate);
         int yearsOldInt = yearsOld.getYears();
         if (yearsOldInt < 0) {
-            System.out.println("Вы ввели невозможное значение\nПожалуйста, введите правильную дату рождения в следующий раз");
-            return "";
+            return undefinedAge;
         }
         String yearsOldStr = String.valueOf(yearsOldInt);
         int indLastChar = yearsOldStr.length()-1;
@@ -64,9 +79,9 @@ public class Main {
 
     public static void main(String[] args) {
         String name = inputName();
-        LocalDate dateBirth = inputDateBirth();
+        Optional<LocalDate> birthDate = inputBirthDate();
         System.out.println("ФИО с инициалами: " + getInitials(name));
         System.out.println("Пол: " + getGender(name));
-        System.out.println("Возраст: " + getAge(dateBirth, LocalDate.now()));
+        System.out.println("Возраст: " + getAge(birthDate, LocalDate.now()));
     }
 }

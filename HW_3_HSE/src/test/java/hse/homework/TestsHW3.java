@@ -1,6 +1,8 @@
 package hse.homework;
 
 import java.time.LocalDate;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,19 +18,44 @@ public class TestsHW3 {
 
     @Test
     void getAgeTest1(){
-        LocalDate dateBirth = LocalDate.of(2005, 4, 15);
+        Optional<LocalDate> birthDate = Optional.of(LocalDate.of(2005, 4, 15));
         LocalDate currentDate = LocalDate.parse("2024-11-09");
         String expected = "19 лет";
-        String actual = getAge(dateBirth, currentDate);
+        String actual = getAge(birthDate, currentDate);
         Assertions.assertEquals(actual, expected);
     }
 
     @Test
     void getAgeTest2(){
-        LocalDate dateBirth = LocalDate.of(2005, 12, 15);
+        Optional<LocalDate> birthDate = Optional.of(LocalDate.of(2005, 12, 15));
         LocalDate currentDate = LocalDate.parse("2024-11-09");
         String expected = "18 лет";
-        String actual = getAge(dateBirth, currentDate);
+        String actual = getAge(birthDate, currentDate);
+        Assertions.assertEquals(actual, expected);
+    }
+
+    @Test
+    void getAgeTest3() {
+        Optional<LocalDate> birthDate = Optional.empty();
+        LocalDate currentDate = LocalDate.parse("2024-11-09");
+        String expected = "Не определён";
+        String actual = getAge(birthDate, currentDate);
+        Assertions.assertEquals(actual, expected);
+    }
+
+    @Test
+    void parseDateTest1() {
+        String input = "1.1.1111";
+        Optional<LocalDate> expected = Optional.empty();
+        Optional<LocalDate> actual = parseBirthDate(input);
+        Assertions.assertEquals(actual, expected);
+    }
+
+    @Test
+    void parseDateTest2() {
+        String input = "01.11.1111";
+        Optional<LocalDate> expected = Optional.of(LocalDate.parse("1111-11-01"));
+        Optional<LocalDate> actual = parseBirthDate(input);
         Assertions.assertEquals(actual, expected);
     }
 
